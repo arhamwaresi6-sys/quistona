@@ -1,0 +1,586 @@
+/* =========================================================
+   QUESTONA - base.css
+   Shared styles used by EVERY page:
+   colours, navbar, buttons, cards, forms, modal, footer.
+   Written mobile-first: default = phone, bigger screens
+   are handled in the @media blocks.
+   ========================================================= */
+
+/* ---------- 1. Colours & sizes (change them here once) ---------- */
+:root {
+  --black: #0a0a0a;
+  --white: #ffffff;
+  --gray-100: #f5f5f5;
+  --gray-200: #e8e8e8;
+  --gray-400: #a3a3a3;
+  --gray-600: #606060;
+
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ---------- 2. Reset ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: var(--gray-100);
+  color: var(--black);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+/* ---------- 3. Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.page-head {
+  padding: 36px 0 22px;
+}
+
+.page-head h1 {
+  font-size: 2rem;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.page-head p {
+  color: var(--gray-600);
+  margin-top: 6px;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+/* ---------- 4. Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 66px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+}
+
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  background: var(--black);
+  color: var(--white);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+}
+
+.nav-links {
+  display: none; /* hidden on phones, opened by the menu button */
+  position: absolute;
+  top: 66px;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  padding: 16px 18px 22px;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid var(--gray-200);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.nav-links.open {
+  display: flex;
+}
+
+.nav-links a {
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  color: var(--gray-600);
+  transition: 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--gray-100);
+  color: var(--black);
+}
+
+.nav-links .btn {
+  margin-top: 6px;
+  color: var(--white);
+}
+
+.menu-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* ---------- 5. Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--black);
+  background: var(--black);
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--black);
+}
+
+.btn-outline:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-light {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.btn-small {
+  padding: 7px 16px;
+  font-size: 0.85rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- 6. Breadcrumb ---------- */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  padding-top: 26px;
+}
+
+.breadcrumb a {
+  color: var(--black);
+  font-weight: 500;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 7. Cards (grid + card) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  padding-bottom: 60px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  transition: 0.25s;
+}
+
+.card:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card:hover .muted {
+  color: var(--gray-400);
+}
+
+.card-main {
+  display: block;
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.muted {
+  color: var(--gray-600);
+  font-size: 0.92rem;
+}
+
+/* small Edit / Delete buttons inside a card */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--gray-200);
+}
+
+.card:hover .card-actions {
+  border-color: #2a2a2a;
+}
+
+.card:hover .btn-outline {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.card:hover .btn-outline:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+/* ---------- 8. Forms ---------- */
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 13px 18px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--black);
+  outline: none;
+  transition: 0.2s;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--black);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.06);
+}
+
+.input-file {
+  border-radius: var(--radius-md);
+  padding: 16px;
+  background: var(--gray-100);
+}
+
+.search {
+  max-width: 100%;
+}
+
+/* ---------- 9. Empty message ---------- */
+.empty {
+  display: block; /* shown by JS when search finds nothing */
+  text-align: center;
+  padding: 50px 20px;
+  background: var(--white);
+  border: 2px dashed var(--gray-200);
+  border-radius: var(--radius-lg);
+  color: var(--gray-600);
+  margin-bottom: 60px;
+}
+
+/* ---------- 10. Pop-up (modal) ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: flex-end; /* sheet from bottom on phones */
+  justify-content: center;
+  z-index: 100;
+  padding: 0;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--white);
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 28px 24px 32px;
+}
+
+.modal-box h2 {
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.modal-box > .muted {
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.modal-buttons .btn {
+  flex: 1;
+}
+
+/* ---------- 11. Footer ---------- */
+.footer {
+  background: var(--black);
+  color: var(--gray-400);
+  text-align: center;
+  padding: 34px 18px;
+  font-size: 0.9rem;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.footer strong {
+  color: var(--white);
+}
+
+/* ---------- 12. Bigger screens ---------- */
+@media (min-width: 768px) {
+  .menu-btn {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    gap: 4px;
+  }
+
+  .nav-links .btn {
+    margin: 0 0 0 10px;
+  }
+
+  .page-head h1 {
+    font-size: 2.6rem;
+  }
+
+  .toolbar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .search {
+    max-width: 360px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal {
+    align-items: center;
+    padding: 20px;
+  }
+
+  .modal-box {
+    border-radius: var(--radius-lg);
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* error_msg */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  width: 100%;
+  max-width: 420px;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  margin: 16px auto;
+
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-left: 4px solid #e11d48;
+  border-radius: 12px;
+
+  color: #9f1239;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+
+  animation: error-appear 0.3s ease-out;
+}
+
+.error-message p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.error-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+
+  background: #e11d48;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+@keyframes error-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .error-message {
+    gap: 10px;
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-message {
+    animation: none;
+  }
+}
+
+/* userinfo */
+.user-name {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #ffffff, #f3f4f6);
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.user-name:hover {
+  background: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.user-name:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}

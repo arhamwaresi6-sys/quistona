@@ -1,0 +1,55 @@
+/* =========================================================
+   supplementary.css - only the Supplementary Questions page
+   (also reused by the Regular / Supplementary tab switch,
+   so questions.html links to this file too)
+   ========================================================= */
+
+/* ---------- Regular | Supplementary switch ---------- */
+.switch-tabs {
+  display: inline-flex;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  padding: 5px;
+  margin-bottom: 22px;
+}
+
+.switch-tab {
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gray-600);
+  transition: 0.2s;
+}
+
+.switch-tab:hover {
+  color: var(--black);
+}
+
+.switch-tab.active {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ---------- Info banner ---------- */
+.info-banner {
+  background: var(--black);
+  color: var(--white);
+  border-radius: var(--radius-md);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+
+.info-banner p {
+  color: var(--gray-400);
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
+
+/* ---------- "Supplementary" tag stands out as an outline ----------
+   (in questions.css the first tag is solid black, so we keep it
+   solid here too and make the other tags light grey.) */
+.tag:first-child {
+  letter-spacing: 0.03em;
+}

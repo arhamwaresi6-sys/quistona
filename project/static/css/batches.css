@@ -1,0 +1,13 @@
+/* =========================================================
+   batches.css - only the Batch page
+   ========================================================= */
+
+/* big year number on each batch card */
+.year {
+  display: block;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 14px;
+}

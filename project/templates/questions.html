@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questona - Questions</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/base.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/questions.css')}}"
+    />
+    <!-- supplementary.css has the Regular / Supplementary tab switch -->
+    <link rel="stylesheet" href="css/supplementary.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="/" class="logo"><span class="logo-mark">Q</span> Questona</a>
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
+        <nav class="nav-links" id="navLinks">
+          <a href="/">Home</a>
+          <a href="/batches" class="active">Batches</a>
+          <a href="{{ url_for('main.users') }}" class="active">Community</a>
+          {%if current_user.is_authenticated%}
+          <a href="{{ url_for('main.profile') }}" class="user-name">
+            {{ current_user.name }}
+          </a>
+          {%endif%} {%if not current_user.is_authenticated%}
+          <a href="/login" class="btn btn-small">Login / Sign up</a>
+          {%endif%}
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a> /
+        <a href="/batches">{{course.semester.batch.name}}</a> /
+        <a
+          href="{{url_for('main.semesters',batch_id = course.semester.batch_id)}}"
+          >{{course.semester.name}}</a
+        >
+        /
+        <a href="{{url_for('main.courses',semester_id = course.semester_id)}}"
+          >{{course.name}}</a
+        >
+        /
+        <span>Questions</span>
+      </div>
+
+      <div class="page-head">
+        <h1>{{course.name}}</h1>
+        <p>Tap a picture to view it full screen.</p>
+      </div>
+
+      <!-- Switch between regular and supplementary questions -->
+      <div class="switch-tabs">
+        <a
+          href="{{url_for('main.questions',course_id = course.id)}}"
+          class="switch-tab active"
+          >Regular</a
+        >
+        <a
+          href="{{ url_for('main.supplementary', course_id=course.id) }}"
+          class="switch-tab"
+          >Supplementary</a
+        >
+      </div>
+
+      <!-- Filter buttons + Upload button -->
+      <div class="toolbar">
+        <div class="filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="quiz">Quiz</button>
+          <button class="chip" data-filter="final">Final</button>
+        </div>
+        <button class="btn" data-open="uploadModal">+ Upload question</button>
+      </div>
+
+      <!-- QUESTION POSTS: image on top, uploader details below -->
+      <div class="posts">
+        {%for image in course.images%} {%if image.course_type == 'regular'%}
+        <article class="post" data-type="{{image.type}}">
+          <img
+            class="post-img"
+            src="{{image.url}}"
+            alt="{{image.type}} {{image.course.name}}"
+          />
+
+          <div class="post-info">
+            <div class="tags">
+              <span class="tag">{{image.type}}</span>
+              <span class="tag">{{image.course.semester.batch.name}}</span>
+            </div>
+
+            <!-- USER DETAIL below the image -->
+            <div class="uploader">
+              <span class="avatar">{{ image.user.name[0].upper() }}</span>
+              <div>
+                <strong>{{image.user.name}}</strong>
+                <p class="muted">
+                  {{image.course.semester.batch.name}} &middot; Uploaded
+                  {{image.pretty_date}}
+                </p>
+              </div>
+            </div>
+
+            <div class="post-actions">
+              <a
+                href="{{ url_for('main.download_image', image_id=image.id) }}"
+                class="btn btn-outline btn-small"
+              >
+                Download
+              </a>
+              {%if image.user == current_user or current_user.role == "admin" or
+              current_user.role == "root"%}
+              <button
+                class="btn btn-outline btn-small"
+                data-edit-modal="editImage"
+                data-name="{{ image.type }}"
+                data-action="{{ url_for('main.edit_image', image_id=image.id) }}"
+              >
+                Replace
+              </button>
+              <a
+                class="btn btn-outline btn-small"
+                data-delete="this image"
+                href="{{url_for('main.delete_image',image_id=image.id)}}"
+              >
+                Delete
+              </a>
+              {%endif%}
+            </div>
+          </div>
+        </article>
+        {%endif%} {%endfor%}
+      </div>
+      {%if not course.images%}
+      <div class="empty" id="emptyMessage">No questions yet!</div>
+      {%endif%}
+    </main>
+
+    <!-- UPLOAD POP-UP -->
+    <div class="modal" id="uploadModal">
+      <div class="modal-box">
+        <h2>Upload question</h2>
+        <p class="muted">JPG, PNG or WEBP. Max 5 MB each.</p>
+        <!-- Flask: use enctype="multipart/form-data" for file upload -->
+        <form
+          action="{{url_for('main.upload',course_id = course.id,course_type = 'regular')}}"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="field">
+            <label for="images">Pictures</label>
+            <input
+              type="file"
+              class="input input-file"
+              id="images"
+              name="image"
+              accept=".jpg,.jpeg,.png,.webp"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="examType">Exam type</label>
+            <select class="select" id="examType" name="type">
+              <option value="quiz">Quiz</option>
+              <option value="final">Final</option>
+            </select>
+          </div>
+          <div class="modal-buttons">
+            <button type="button" class="btn btn-outline" data-close>
+              Cancel
+            </button>
+            <button type="submit" class="btn">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- EDIT IMAGE MODAL -->
+    <div class="modal" id="editImage">
+      <div class="modal-box">
+        <h2>Edit Image</h2>
+        <p class="muted">Update the image type.</p>
+
+        <form id="editImageForm" method="POST">
+          <div class="field">
+            <label for="editImageName">Image type</label>
+            <input
+              type="text"
+              class="input"
+              id="editImageName"
+              name="name"
+              placeholder="quiz or final"
+              required
+            />
+          </div>
+
+          <div class="modal-buttons">
+            <button type="button" class="btn btn-outline" data-close>
+              Cancel
+            </button>
+            <button type="submit" class="btn">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- FULL-SCREEN IMAGE VIEWER -->
+    <div class="lightbox" id="lightbox">
+      <img id="lightboxImg" src="" alt="Question picture" />
+      <span class="lightbox-hint">Tap anywhere to close</span>
+    </div>
+
+    <footer class="footer">
+      <p><strong>Questona</strong> &copy; 2026</p>
+    </footer>
+
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+  </body>
+</html>

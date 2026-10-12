@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questona - Semesters</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/base.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/semesters.css')}}"
+    />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="/" class="logo"><span class="logo-mark">Q</span> Questona</a>
+        <button class="menu-btn" id="menuBtn">&#9776;</button>
+        <nav class="nav-links" id="navLinks">
+          <a href="/">Home</a>
+          <a href="/batches" class="active">Batches</a>
+          <a href="{{ url_for('main.users') }}" class="active">Community</a>
+          {%if current_user.is_authenticated%}
+          <a href="{{ url_for('main.profile') }}" class="user-name">
+            {{ current_user.name }}
+          </a>
+          {%endif%} {%if not current_user.is_authenticated%}
+          <a href="/login" class="btn btn-small">Login / Sign up</a>
+          {%endif%}
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a> / <a href="/batches">Batch {{batch.name}}</a> /
+        <span>Semesters</span>
+      </div>
+
+      <div class="page-head">
+        <h1>Batch {{batch.name}} semesters</h1>
+        <p>Select a semester to see its courses.</p>
+      </div>
+
+      <div class="toolbar">
+        <input
+          type="text"
+          class="input search"
+          placeholder="Search semester..."
+          data-search=".card"
+        />
+        {%if current_user.role == "admin" or current_user.role =='root'%}
+        <button class="btn" data-open="addSemester">+ Add semester</button>
+        {%endif%}
+      </div>
+
+      <div class="grid">
+        {%for semester in semesters%}
+        <div class="card">
+          <a
+            href="{{ url_for('main.courses', semester_id=semester.id) }}"
+            class="card-main"
+          >
+            <span class="sem-number">{{ loop.index }}</span>
+            <h3>{{semester.name}} Semester</h3>
+            <p class="muted">{{semester.course_count}}</p>
+          </a>
+          <div class="card-actions">
+            {%if current_user.role == "admin" or current_user.role =='root'%}
+            <button
+              class="btn btn-outline btn-small"
+              data-edit-modal="editSemester"
+              data-name="{{ semester.name }}"
+              data-action="{{ url_for('main.edit_semester', semester_id=semester.id) }}"
+            >
+              Edit
+            </button>
+            <a
+              class="btn btn-outline btn-small"
+              data-delete="Batch 2021"
+              href="{{url_for('main.delete_semester',semester_id = semester.id)}}"
+            >
+              Delete
+            </a>
+
+            {%endif%}
+          </div>
+        </div>
+        {%endfor%} {%if not semesters%}
+        <div class="empty" id="emptyMessage">No semesters yet!</div>
+        {%endif%}
+      </div>
+    </main>
+
+    <!-- ADD / EDIT POP-UP -->
+    <div class="modal" id="addSemester">
+      <div class="modal-box">
+        <h2>Add semester</h2>
+        <p class="muted">It will be added to Batch 2022.</p>
+        <form
+          action="{{url_for('main.create_semester',batch_id = batch.id)}}"
+          method="post"
+        >
+          <div class="field">
+            <label for="semName">Semester name</label>
+            <input
+              type="text"
+              class="input"
+              id="semName"
+              name="name"
+              placeholder="4th Semester"
+              required
+            />
+          </div>
+          <div class="modal-buttons">
+            <button type="button" class="btn btn-outline" data-close>
+              Cancel
+            </button>
+            <button type="submit" class="btn">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- EDIT SEMESTER MODAL -->
+    <div class="modal" id="editSemester">
+      <div class="modal-box">
+        <h2>Edit Semester</h2>
+        <p class="muted">Update the semester name.</p>
+
+        <form id="editSemesterForm" method="post">
+          <div class="field">
+            <label for="editSemesterName">Semester name</label>
+            <input
+              type="text"
+              class="input"
+              id="editSemesterName"
+              name="name"
+              required
+            />
+          </div>
+
+          <div class="modal-buttons">
+            <button type="button" class="btn btn-outline" data-close>
+              Cancel
+            </button>
+            <button type="submit" class="btn">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p><strong>Questona</strong> &copy; 2026</p>
+    </footer>
+
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+  </body>
+</html>

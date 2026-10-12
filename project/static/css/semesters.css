@@ -1,0 +1,24 @@
+/* =========================================================
+   semesters.css - only the Semester page
+   ========================================================= */
+
+/* round number badge on each semester card */
+.sem-number {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: var(--black);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  transition: 0.25s;
+}
+
+/* when the card turns black, flip the badge to white */
+.card:hover .sem-number {
+  background: var(--white);
+  color: var(--black);
+}

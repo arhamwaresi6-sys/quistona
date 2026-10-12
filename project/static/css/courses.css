@@ -1,0 +1,15 @@
+/* =========================================================
+   courses.css - only the Courses page
+   ========================================================= */
+
+/* course code shown as a small pill */
+.code {
+  display: inline-block;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-pill);
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+  <rect width="600" height="800" fill="#fafafa"/>
+  <rect x="30" y="30" width="540" height="740" fill="none" stroke="#0a0a0a" stroke-width="2"/>
+  <text x="300" y="90" font-family="Arial" font-size="26" font-weight="bold" text-anchor="middle" fill="#0a0a0a">SAMPLE QUESTION PAPER</text>
+  <text x="300" y="122" font-family="Arial" font-size="16" text-anchor="middle" fill="#606060">Replace with the uploaded photo</text>
+  <line x1="60" y1="150" x2="540" y2="150" stroke="#0a0a0a"/>
+  <g stroke="#cfcfcf" stroke-width="3">
+    <line x1="60" y1="200" x2="540" y2="200"/><line x1="60" y1="230" x2="480" y2="230"/>
+    <line x1="60" y1="260" x2="520" y2="260"/><line x1="60" y1="320" x2="540" y2="320"/>
+    <line x1="60" y1="350" x2="450" y2="350"/><line x1="60" y1="380" x2="510" y2="380"/>
+    <line x1="60" y1="440" x2="540" y2="440"/><line x1="60" y1="470" x2="490" y2="470"/>
+    <line x1="60" y1="500" x2="530" y2="500"/><line x1="60" y1="560" x2="540" y2="560"/>
+    <line x1="60" y1="590" x2="430" y2="590"/><line x1="60" y1="620" x2="500" y2="620"/>
+  </g>
+</svg>

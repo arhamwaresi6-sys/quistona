@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Profile | Questona</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/profile.css') }}"
+    />
+  </head>
+
+  <body>
+    <main class="profile-container">
+      <a href="{{ url_for('main.index') }}" class="back-link">
+        &larr; Back to home
+      </a>
+
+      <section class="profile-card">
+        <div class="profile-header">
+          <div class="avatar">{{ current_user.name[0]|upper }}</div>
+
+          <div>
+            <h1>{{ current_user.name }}</h1>
+            <p>{{ current_user.email }}</p>
+
+            <span class="role-badge"> {{ current_user.role|title }} </span>
+          </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+
+        <div class="section-heading">
+          <h2>Personal information</h2>
+          <p>Update your account details.</p>
+        </div>
+
+        <form action="{{ url_for('main.update_profile') }}" method="POST">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value="{{ current_user.name }}"
+              maxlength="50"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="{{ current_user.email }}"
+              maxlength="50"
+              required
+            />
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="section-heading">
+            <h2>Change password</h2>
+            <p>Leave these fields empty if you don't want to change it.</p>
+          </div>
+
+          <div class="form-group">
+            <label for="current_password">Current password</label>
+            <input
+              type="password"
+              id="current_password"
+              name="current_password"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="new_password">New password</label>
+            <input
+              type="password"
+              id="new_password"
+              name="new_password"
+              minlength="8"
+              autocomplete="new-password"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </form>
+
+        <div class="divider"></div>
+
+        <div class="logout-section">
+          <div>
+            <h2>Sign out</h2>
+            <p>Sign out of your Questona account on this device.</p>
+          </div>
+
+          <form action="{{ url_for('auth.logout') }}" method="POST">
+            <button type="submit" class="btn btn-danger">Log out</button>
+          </form>
+        </div>
+      </section>
+
+      <footer>
+        &copy; {{ current_year if current_year is defined else 2026 }} Questona
+      </footer>
+    </main>
+  </body>
+</html>

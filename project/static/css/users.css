@@ -1,0 +1,465 @@
+/* =========================================================
+   users.css - only the Users page
+   Main theme: BLACK.  base.css is light, so everything that
+   needs to change is overridden below with ".dark-page ..."
+   Role boxes:
+     .role-root  -> glowing purple
+     .role-admin -> white
+     .role-user  -> transparent
+   ========================================================= */
+
+/* ---------- 1. Black page ---------- */
+.dark-page {
+  background: #000;
+  color: var(--white);
+}
+
+/* navbar */
+.dark-page .navbar {
+  background: rgba(8, 8, 8, 0.88);
+  border-bottom-color: #1f1f1f;
+}
+
+.dark-page .logo-mark {
+  background: var(--white);
+  color: var(--black);
+}
+
+.dark-page .menu-btn {
+  background: #111;
+  color: var(--white);
+  border-color: #2a2a2a;
+}
+
+.dark-page .nav-links {
+  background: #0a0a0a;
+  border-bottom-color: #1f1f1f;
+}
+
+.dark-page .nav-links a {
+  color: var(--gray-400);
+}
+
+.dark-page .nav-links a:hover,
+.dark-page .nav-links a.active {
+  background: #1a1a1a;
+  color: var(--white);
+}
+
+.dark-page .nav-links .btn,
+.dark-page .nav-links .btn:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+/* breadcrumb + page title */
+.dark-page .breadcrumb {
+  color: var(--gray-400);
+}
+
+.dark-page .breadcrumb a {
+  color: var(--white);
+}
+
+.dark-page .page-head p {
+  color: var(--gray-400);
+}
+
+/* footer */
+.dark-page .footer {
+  background: #0a0a0a;
+  border-top: 1px solid #1f1f1f;
+}
+
+/* "no members found" message */
+.dark-page .empty {
+  background: #0a0a0a;
+  border-color: #2a2a2a;
+  color: var(--gray-400);
+}
+
+/* ---------- 2. Summary numbers ---------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat {
+  background: #0d0d0d;
+  border: 1px solid #1f1f1f;
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.stat span {
+  font-size: 0.85rem;
+  color: var(--gray-400);
+}
+
+/* ---------- 3. Legend (explains the 3 box styles) ---------- */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border: 1px solid #1f1f1f;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  color: var(--gray-400);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot-root {
+  background: #a855f7;
+  box-shadow: 0 0 10px #a855f7;
+}
+
+.dot-admin {
+  background: var(--white);
+}
+
+.dot-user {
+  border: 1.5px solid var(--gray-400);
+}
+
+/* ---------- 4. Search + filter buttons ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid #2a2a2a;
+  background: transparent;
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--white);
+}
+
+.chip.active {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.dark-page .input {
+  background: #0d0d0d;
+  border-color: #2a2a2a;
+  color: var(--white);
+}
+
+.dark-page .input::placeholder {
+  color: #6b6b6b;
+}
+
+.dark-page .input:focus {
+  border-color: var(--white);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- 5. User card: shared parts ---------- */
+.user-card {
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  border: 1px solid #2a2a2a;
+  transition: 0.25s;
+}
+
+.user-card:hover {
+  transform: translateY(-4px);
+}
+
+.user-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.role-badge {
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.user-card h3 {
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.user-meta {
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+/* two small boxes: uploads + joined date */
+.user-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.user-stats div {
+  border-radius: 18px;
+  padding: 12px 14px;
+}
+
+.user-stats strong {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+
+.user-stats span {
+  font-size: 0.78rem;
+}
+
+/* ---------- 6. USER: transparent ---------- */
+.role-user {
+  background: transparent;
+  color: var(--white);
+}
+
+.role-user:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: #4a4a4a;
+}
+
+.role-user .avatar {
+  background: #1a1a1a;
+  border: 1px solid #333;
+}
+
+.role-user .role-badge {
+  border: 1px solid #3a3a3a;
+  color: var(--gray-400);
+}
+
+.role-user .user-meta,
+.role-user .user-stats span {
+  color: var(--gray-400);
+}
+
+.role-user .user-stats div {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.role-user .btn {
+  background: transparent;
+  color: var(--white);
+  border-color: #3a3a3a;
+}
+
+.role-user .btn:hover {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+/* ---------- 7. ADMIN: white ---------- */
+.role-admin {
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.07);
+}
+
+.role-admin:hover {
+  box-shadow: 0 14px 44px rgba(255, 255, 255, 0.2);
+}
+
+.role-admin .avatar {
+  background: var(--black);
+  color: var(--white);
+}
+
+.role-admin .role-badge {
+  background: var(--black);
+  color: var(--white);
+}
+
+.role-admin .user-meta,
+.role-admin .user-stats span {
+  color: var(--gray-600);
+}
+
+.role-admin .user-stats div {
+  background: #f1f1f1;
+}
+
+.role-admin .btn {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+.role-admin .btn:hover {
+  background: #2a2a2a;
+}
+
+/* ---------- 8. ROOT: glowing purple ---------- */
+.role-root {
+  color: var(--white);
+  border-color: rgba(192, 132, 252, 0.75);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(168, 85, 247, 0.4),
+      transparent 60%
+    ),
+    #13041f;
+  box-shadow:
+    0 0 0 1px rgba(168, 85, 247, 0.4),
+    0 0 28px rgba(168, 85, 247, 0.55),
+    0 0 80px rgba(147, 51, 234, 0.25);
+  animation: rootGlow 3s ease-in-out infinite;
+}
+
+/* the glow slowly gets stronger and softer */
+@keyframes rootGlow {
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(192, 132, 252, 0.7),
+      0 0 40px rgba(168, 85, 247, 0.85),
+      0 0 110px rgba(147, 51, 234, 0.4);
+  }
+}
+
+.role-root .avatar {
+  background: linear-gradient(135deg, #c084fc, #7e22ce);
+  color: var(--white);
+  box-shadow: 0 0 18px rgba(192, 132, 252, 0.8);
+}
+
+.role-root .role-badge {
+  background: #a855f7;
+  color: var(--white);
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.8);
+}
+
+.role-root .user-meta,
+.role-root .user-stats span {
+  color: #d8b4fe;
+}
+
+.role-root .user-stats div {
+  background: rgba(168, 85, 247, 0.14);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+}
+
+.role-root .btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border-color: rgba(216, 180, 254, 0.6);
+}
+
+.role-root .btn:hover {
+  background: var(--white);
+  color: #3b0764;
+  border-color: var(--white);
+}
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.user-actions form {
+  margin: 0;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* people who turned off animations get a still glow */
+@media (prefers-reduced-motion: reduce) {
+  .role-root {
+    animation: none;
+  }
+}
+
+/* ---------- 9. Bigger screens ---------- */
+@media (min-width: 768px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.user-name {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1f2937, #111827);
+  color: #f9fafb;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.user-name:hover {
+  background: linear-gradient(135deg, #374151, #1f2937);
+  border-color: #4b5563;
+  color: #ffffff;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.user-name:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}

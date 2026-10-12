@@ -1,0 +1,179 @@
+/* =========================================================
+   questions.css - only the Question page
+   ========================================================= */
+
+/* ---------- Filter buttons ---------- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--gray-200);
+  background: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--black);
+}
+
+.chip.active {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+/* ---------- Posts grid ---------- */
+.posts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  padding-bottom: 60px;
+}
+
+.post {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  overflow: hidden; /* keeps the image inside the curved corners */
+  box-shadow: var(--shadow);
+}
+
+.post-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  background: var(--gray-100);
+  cursor: zoom-in;
+}
+
+/* ---------- Details below the image ---------- */
+.post-info {
+  padding: 20px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.tag {
+  background: var(--black);
+  color: var(--white);
+  border-radius: var(--radius-pill);
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tag:not(:first-child) {
+  background: var(--gray-100);
+  color: var(--black);
+}
+
+/* uploader row: round avatar + name + info */
+.uploader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--gray-100);
+  border-radius: var(--radius-md);
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--white);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.post-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* ---------- Full-screen image viewer ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  z-index: 200;
+  padding: 20px;
+  cursor: zoom-out;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-height: 85vh;
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+
+.lightbox-hint {
+  color: var(--gray-400);
+  font-size: 0.85rem;
+}
+
+/* ---------- Bigger screens ---------- */
+@media (min-width: 768px) {
+  .posts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .posts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.switch-tabs {
+  display: inline-flex;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-pill);
+  padding: 5px;
+  margin-bottom: 22px;
+}
+
+.switch-tab {
+  padding: 9px 22px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--gray-600);
+  transition: 0.2s;
+}
+
+.switch-tab:hover {
+  color: var(--black);
+}
+
+.switch-tab.active {
+  background: var(--black);
+  color: var(--white);
+}
