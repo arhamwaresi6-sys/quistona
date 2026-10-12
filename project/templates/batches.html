@@ -66,7 +66,7 @@
         <div class="card">
           <a href="{{ url_for('main.semesters', batch_id=batch.id) }}" class="card-main">
             <span class="year">{{batch.created_at.year}}</span>
-            <h3>Batch {{batch.name}}</h3>
+            <h3>{{batch.name}} Batch</h3>
             <p class="muted">{{batch.semester_count}} semesters</p>
           </a>
           <div class="card-actions">

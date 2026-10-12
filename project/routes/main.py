@@ -15,7 +15,9 @@ main = Blueprint("main",__name__)
 @main.route("/")
 def index():
     images = db.session.execute(
-        db.select(Image).limit(3).order_by(Image.created_at)
+        db.select(Image)
+        .order_by(Image.created_at.desc(), Image.id.desc())
+        .limit(3)
     ).scalars().all()
     context = {
         "current_user":current_user,

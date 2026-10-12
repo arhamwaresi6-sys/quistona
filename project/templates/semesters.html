@@ -103,7 +103,7 @@
     <div class="modal" id="addSemester">
       <div class="modal-box">
         <h2>Add semester</h2>
-        <p class="muted">It will be added to Batch 2022.</p>
+        <p class="muted">It will be added to {{batch.name}} Batch.</p>
         <form
           action="{{url_for('main.create_semester',batch_id = batch.id)}}"
           method="post"
