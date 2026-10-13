@@ -116,7 +116,7 @@
       <div class="grid" id="usersGrid">
         {% for user in users %}
         <article
-          class="user-card role-{{ user.role }}"
+          class="user-card {% if user.email in ['rizwanajerin33@gmail.com', 'lqvisuals@gmail.com'] %}role-female{% else %}role-{{ user.role }}{% endif %}"
           data-type="{{ user.role }}"
         >
           <div class="user-top">

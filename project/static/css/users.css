@@ -435,3 +435,65 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+.role-female {
+  color: var(--white);
+  border-color: rgba(249, 168, 212, 0.75);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(244, 114, 182, 0.3),
+      transparent 60%
+    ),
+    #1f0a17;
+
+  box-shadow:
+    0 0 0 1px rgba(249, 168, 212, 0.3),
+    0 0 28px rgba(244, 114, 182, 0.35),
+    0 0 80px rgba(236, 72, 153, 0.15);
+
+  animation: femaleGlow 3s ease-in-out infinite;
+}
+
+/* Soft pink glow animation */
+@keyframes femaleGlow {
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(251, 207, 232, 0.7),
+      0 0 40px rgba(244, 114, 182, 0.6),
+      0 0 110px rgba(236, 72, 153, 0.3);
+  }
+}
+
+.role-female .avatar {
+  background: linear-gradient(135deg, #fbcfe8, #ec4899);
+  color: var(--white);
+  box-shadow: 0 0 18px rgba(249, 168, 212, 0.6);
+}
+
+.role-female .role-badge {
+  background: #f472b6;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(244, 114, 182, 0.5);
+}
+
+.role-female .user-meta,
+.role-female .user-stats span {
+  color: #f9a8d4;
+}
+
+.role-female .user-stats div {
+  background: rgba(244, 114, 182, 0.08);
+  border: 1px solid rgba(249, 168, 212, 0.2);
+}
+
+.role-female .btn {
+  background: rgba(249, 168, 212, 0.08);
+  color: var(--white);
+  border-color: rgba(249, 168, 212, 0.5);
+}
+
+.role-female .btn:hover {
+  background: #fbcfe8;
+  color: #831843;
+  border-color: #fbcfe8;
+}
